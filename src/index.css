@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-main-bg: #FDFCF7;
+    --color-pure-white: #FFFFFF;
+    --color-midnight-onyx: #1C1C1C;
+    --color-antique-glint: #C4A468;
+    --color-antique-glint-hover: #B39255;
+    --color-heritage-sage: #5A6B5C;
+    --color-heritage-sage-light: #EBF0EC;
+    --color-desert-blush: #B2948C;
+    --color-desert-blush-light: #F7F1EE;
+    --color-divider: #EFECE4;
+    --color-muted: #6B605B;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 92px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    color: #1C1C1C;
+    background-color: #FDFCF7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body {
+    background-color: #FDFCF7;
+    color: #1C1C1C;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    font-weight: 350;
+    letter-spacing: -0.01em;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+    color: #1C1C1C;
+  }
+
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: 0.01em;
+  }
+
+  .font-display {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Custom AFW LUXE scrollbar with smooth styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #D6CBB8 #FDFCF7;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FDFCF7;
+}
+::-webkit-scrollbar-thumb {
+  background: #D6CBB8;
+  border-radius: 999px;
+  border: 2px solid #FDFCF7;
+  transition: background-color 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C4A468;
+}
+
+/* Hardware-accelerated image hover zoom */
+.zoom-image {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+.group:hover .zoom-image {
+  transform: scale(1.04) translateZ(0);
+}
+
+/* Fast scrolling optimization: defer layout/paint of offscreen content */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* AFW LUXE signature pill button styling with Antique Glint (#C4A468) */
+.btn-luxury-primary {
+  background-color: #C4A468;
+  color: #1C1C1C;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #C4A468;
+  box-shadow: 0 4px 16px rgba(196, 164, 104, 0.2);
+}
+.btn-luxury-primary:hover {
+  background-color: #B39255;
+  border-color: #B39255;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(196, 164, 104, 0.3);
+}
+
+.btn-luxury-secondary {
+  background-color: transparent;
+  color: #1C1C1C;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #C4A468;
+}
+.btn-luxury-secondary:hover {
+  background-color: #C4A468;
+  color: #1C1C1C;
+  border-color: #C4A468;
+  transform: translateY(-1px);
+}
+

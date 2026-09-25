@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix AFW LUXE",
+  "description": "London-designed luxury womenswear for the modern, elegant, modest woman. Discover elegant long dresses, chic abayas, kurtis, and contemporary tops.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
