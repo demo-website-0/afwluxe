@@ -1,5 +1,8 @@
 ---
 deployment:
   tasks:
+    - export PATH=$PATH:/usr/local/bin
+    - npm install
+    - npm run build
     - export DEPLOYPATH=/home1/afwluxe/public_html
     - /bin/cp -R dist/* $DEPLOYPATH
