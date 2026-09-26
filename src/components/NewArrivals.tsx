@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Product } from '../types';
 import { ProductCard } from './ProductCard';
 import { ArrowRight } from 'lucide-react';
@@ -22,56 +22,40 @@ export const NewArrivals: React.FC<NewArrivalsProps> = ({
   wishlistIds,
   onViewAll,
 }) => {
-  const [activeFilter, setActiveFilter] = useState<string>('all');
-
-  const filterTabs = [
-    { id: 'all', label: 'All New In' },
-    { id: 'abayas', label: 'Abayas & Kaftans' },
-    { id: 'dresses', label: 'Dresses' },
-    { id: 'kurtis', label: 'Tops & Co-Ords' },
-    { id: 'accessories', label: 'Accessories' },
-  ];
-
-  const filteredProducts = products
-    .filter((p) => activeFilter === 'all' || p.category === activeFilter)
-    .slice(0, 8);
+  const displayProducts = products.slice(0, 8);
 
   return (
-    <section id="new-arrivals" aria-labelledby="new-arrivals-heading" className="py-20 lg:py-28 bg-[#FDFCF7] border-y border-[#EFECE4] scroll-mt-20 lg:scroll-mt-24">
+    <section id="new-arrivals" aria-labelledby="new-arrivals-heading" className="py-12 sm:py-20 lg:py-28 bg-[#FDFCF7] border-y border-[#EFECE4] scroll-mt-20 lg:scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-[#EFECE4] pb-6">
+        <div className="flex items-center justify-between mb-8 sm:mb-12 border-b border-[#EFECE4] pb-4 sm:pb-6">
           <div>
-            <h2 id="new-arrivals-heading" className="text-3xl sm:text-4xl lg:text-5xl text-[#1C1C1C] font-semibold tracking-tight">
+            <h2 id="new-arrivals-heading" className="text-2xl sm:text-4xl lg:text-5xl text-[#1C1C1C] font-semibold tracking-tight">
               New Arrivals
             </h2>
-            <p className="text-xs sm:text-sm text-[#6B605B] font-normal mt-1.5 tracking-normal">
+            <p className="text-xs sm:text-sm text-[#6B605B] font-normal mt-1 tracking-normal">
               Fresh from our London studio • For Her
             </p>
           </div>
 
-          {/* Filter Pills */}
-          <div className="mt-6 md:mt-0 flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
-            {filterTabs.map((tab) => (
-              <button
-                key={tab.id}
-                id={`filter-tab-${tab.id}`}
-                onClick={() => setActiveFilter(tab.id)}
-                className={`px-4 py-2 text-xs uppercase tracking-[0.14em] transition-all cursor-pointer rounded-full whitespace-nowrap ${
-                  activeFilter === tab.id
-                    ? 'bg-[#C4A468] text-[#1C1C1C] font-bold shadow-xs'
-                    : 'bg-[#F4F1E8] hover:bg-[#EFECE4] text-[#1C1C1C]/80 hover:text-[#1C1C1C]'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+          {/* Just an arrow button to see the rest */}
+          <div className="shrink-0">
+            <button
+              type="button"
+              id="view-rest-arrow-btn"
+              onClick={onViewAll}
+              aria-label="See the rest of the collection"
+              className="group flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#1C1C1C] hover:bg-[#C4A468] text-[#FDFCF7] hover:text-[#1C1C1C] text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 shadow-sm cursor-pointer active:scale-95"
+            >
+              <span>See All</span>
+              <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
           </div>
         </div>
 
-        {/* 4-Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {filteredProducts.map((product) => (
+        {/* 2-Column on Mobile, 4-Column on Desktop Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
+          {displayProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -85,11 +69,11 @@ export const NewArrivals: React.FC<NewArrivalsProps> = ({
         </div>
 
         {/* View All Button */}
-        <div className="mt-14 text-center">
+        <div className="mt-10 sm:mt-14 text-center">
           <button
             id="view-all-new-arrivals-btn"
             onClick={onViewAll}
-            className="btn-luxury-secondary"
+            className="btn-luxury-secondary text-xs sm:text-sm py-3 px-6 sm:py-3.5 sm:px-8"
           >
             <span>Explore Collection</span>
             <ArrowRight size={14} />

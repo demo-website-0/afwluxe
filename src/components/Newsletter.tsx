@@ -20,33 +20,33 @@ export const Newsletter: React.FC = () => {
   };
 
   return (
-    <section id="newsletter-section" aria-labelledby="newsletter-heading" className="py-20 lg:py-28 bg-[#FDFCF7] border-y border-[#EFECE4]">
+    <section id="newsletter-section" aria-labelledby="newsletter-heading" className="py-12 sm:py-20 lg:py-28 bg-[#FDFCF7] border-y border-[#EFECE4]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <img
           src={BRAND_LOGO.dark}
           alt={BRAND_LOGO.alt}
-          className="h-16 sm:h-20 w-auto object-contain mx-auto mb-4 drop-shadow-xs"
+          className="h-12 sm:h-20 w-auto object-contain mx-auto mb-3 sm:mb-4 drop-shadow-xs"
           onError={(e) => {
             (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
           }}
         />
 
-        <span className="text-xs uppercase tracking-[0.22em] text-[#B2948C] font-semibold block mb-2">
+        <span className="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#B2948C] font-semibold block mb-1.5 sm:mb-2">
           Private Invitations
         </span>
 
-        <h2 id="newsletter-heading" className="text-3xl sm:text-4xl lg:text-5xl text-[#1C1C1C] font-semibold tracking-tight">
+        <h2 id="newsletter-heading" className="text-2xl sm:text-4xl lg:text-5xl text-[#1C1C1C] font-semibold tracking-tight">
           Join the AFW LUXE List
         </h2>
 
-        <p className="max-w-xl mx-auto text-sm sm:text-base text-[#6B605B] font-light leading-relaxed mt-4">
+        <p className="max-w-xl mx-auto text-xs sm:text-base text-[#6B605B] font-light leading-relaxed mt-2.5 sm:mt-4">
           Be the first to receive new collection drops, styling notes, and exclusive offers. Plus, enjoy 10% off your first order.
         </p>
 
         {!submitted ? (
           <form
             onSubmit={handleSubmit}
-            className="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3"
+            className="mt-6 sm:mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-2.5 sm:gap-3"
           >
             <div className="relative flex-1">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#6B605B]/60">
@@ -59,14 +59,14 @@ export const Newsletter: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="w-full pl-11 pr-4 py-3.5 bg-[#FFFFFF] border border-[#EFECE4] text-sm text-[#1C1C1C] placeholder-[#6B605B]/50 focus:outline-none focus:border-[#C4A468] transition-colors rounded-full shadow-xs"
+                className="w-full pl-11 pr-4 py-3 sm:py-3.5 bg-[#FFFFFF] border border-[#EFECE4] text-xs sm:text-sm text-[#1C1C1C] placeholder-[#6B605B]/50 focus:outline-none focus:border-[#C4A468] transition-colors rounded-full shadow-xs"
               />
             </div>
 
             <button
               id="newsletter-submit-btn"
               type="submit"
-              className="btn-luxury-primary shrink-0 py-3.5 px-7"
+              className="btn-luxury-primary shrink-0 py-3 sm:py-3.5 px-7 w-full sm:w-auto justify-center active:scale-95"
             >
               <span>Subscribe</span>
             </button>

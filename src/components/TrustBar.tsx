@@ -84,27 +84,26 @@ export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
     <section
       id="trust-bar-section"
       aria-label="What's New Categories"
-      className="bg-[#FDFCF7] border-y border-[#EFECE4] py-8 sm:py-10 lg:py-12 select-none overflow-hidden scroll-mt-20 lg:scroll-mt-24"
+      className="bg-[#FDFCF7] border-y border-[#EFECE4] h-[96px] sm:h-auto py-2 sm:py-7 lg:py-9 select-none overflow-hidden scroll-mt-20 lg:scroll-mt-24 flex items-center"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 xl:gap-12">
-          {/* Left Title: WHAT'S NEW */}
-          <div className="shrink-0 flex items-center justify-center lg:justify-start w-full lg:w-auto lg:flex-col lg:items-start">
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1C1C1C] uppercase tracking-tight leading-[1.05] text-center lg:text-left">
-              WHAT'S
-              <br />
-              <span className="text-[#C4A468]">NEW</span>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
+        <div className="flex flex-row items-center justify-between gap-2.5 sm:gap-6 lg:gap-8">
+          {/* Left Title: WHAT'S NEW (Stacked vertically side-by-side on all screens) */}
+          <div className="shrink-0 flex flex-col items-start pr-1 sm:pr-3 select-none">
+            <h2 className="text-[19px] sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold uppercase tracking-tight leading-[0.9] flex flex-col">
+              <span className="text-[#1A1A1A]">WHAT'S</span>
+              <span className="text-[#C4A468] mt-0.5 sm:mt-1">NEW</span>
             </h2>
           </div>
 
           {/* Categories Continuous Looping Track */}
           <div className="w-full relative flex-1 min-w-0 overflow-hidden">
-            {/* Soft edge gradient masks for luxury fade effect */}
-            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-r from-[#FDFCF7] to-transparent z-10" />
-            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-l from-[#FDFCF7] to-transparent z-10" />
+            {/* Soft edge gradient masks for luxury fade effect matching screenshot */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#FDFCF7] via-[#FDFCF7]/60 to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 sm:w-12 bg-gradient-to-l from-[#FDFCF7] to-transparent z-10" />
 
             <div
-              className="animate-marquee-slow flex items-start gap-5 sm:gap-6 lg:gap-7 xl:gap-8 py-1.5 px-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]"
+              className="animate-marquee-slow flex items-start gap-2.5 sm:gap-6 lg:gap-7 py-0.5 sm:py-1 px-1 hover:[animation-play-state:paused] active:[animation-play-state:paused] touch-pan-x"
             >
               {LOOPED_CATEGORIES.map((cat) => (
                 <button
@@ -112,10 +111,10 @@ export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
                   id={`whats-new-cat-${cat.loopKey}`}
                   type="button"
                   onClick={() => handleCategoryClick(cat.categoryId)}
-                  className="flex flex-col items-center group cursor-pointer shrink-0 focus:outline-hidden"
+                  className="flex flex-col items-center group cursor-pointer shrink-0 focus:outline-hidden active:scale-95 transition-transform"
                 >
                   {/* Circular Avatar / Image */}
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 md:w-30 md:h-30 lg:w-26 lg:h-26 xl:w-28 xl:h-28 rounded-full overflow-hidden bg-[#FDFCF7] relative shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:shadow-md border border-[#EFECE4] group-hover:border-[#C4A468]">
+                  <div className="w-14 h-14 sm:w-22 sm:h-22 md:w-26 md:h-26 lg:w-28 lg:h-28 rounded-full overflow-hidden bg-[#FDFCF7] relative shadow-2xs transition-all duration-300 group-hover:scale-105 group-hover:shadow-md border border-[#EFECE4] group-hover:border-[#C4A468]">
                     <img
                       src={cat.image}
                       alt={cat.label}
@@ -128,7 +127,7 @@ export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
                   </div>
 
                   {/* Uppercase Category Label */}
-                  <span className="mt-3 text-center text-xs sm:text-[13px] font-bold tracking-wider text-[#1C1C1C] uppercase whitespace-nowrap group-hover:text-[#C4A468] transition-colors pointer-events-none select-none">
+                  <span className="mt-1 sm:mt-2 text-center text-[9px] sm:text-[11px] md:text-xs font-bold tracking-wider text-[#1C1C1C] uppercase whitespace-nowrap group-hover:text-[#C4A468] transition-colors pointer-events-none select-none">
                     {cat.label}
                   </span>
                 </button>

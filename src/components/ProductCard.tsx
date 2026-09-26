@@ -78,29 +78,43 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
             onToggleWishlist(product);
           }}
           aria-label={isWishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-          className="absolute top-3 right-3 p-2 bg-[#FDFCF7]/95 hover:bg-white text-[#1C1C1C] rounded-full shadow-xs transition-colors z-10 cursor-pointer border border-[#EFECE4]"
+          className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-8 h-8 sm:w-8 sm:h-8 p-1.5 sm:p-2 bg-[#FDFCF7]/95 hover:bg-white text-[#1C1C1C] rounded-full shadow-xs transition-colors z-10 cursor-pointer border border-[#EFECE4] flex items-center justify-center active:scale-90"
         >
           <Heart
-            size={16}
+            size={15}
             className={isWishlisted ? 'fill-[#B2948C] text-[#B2948C]' : 'text-[#1C1C1C]/60'}
           />
         </button>
 
-        {/* Quick View Button */}
+        {/* Mobile Quick Add Floating Button (Direct tap on touchscreens) */}
+        <button
+          type="button"
+          onClick={handleQuickAdd}
+          aria-label={`Quick add ${product.name} to bag`}
+          className={`sm:hidden absolute bottom-2.5 right-2.5 z-10 w-8 h-8 rounded-full flex items-center justify-center shadow-md active:scale-90 transition-all ${
+            justAdded
+              ? 'bg-[#5A6B5C] text-white'
+              : 'bg-[#FDFCF7]/95 text-[#1C1C1C] border border-[#EFECE4]'
+          }`}
+        >
+          {justAdded ? <Check size={13} /> : <ShoppingBag size={13} />}
+        </button>
+
+        {/* Desktop Quick View Button */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             onQuickView(product);
           }}
           aria-label={`Quick view ${product.name}`}
-          className="absolute bottom-14 left-1/2 -translate-x-1/2 bg-[#FDFCF7]/95 hover:bg-[#C4A468] text-[#1C1C1C] text-[11px] uppercase tracking-[0.14em] px-4 py-2 rounded-full border border-[#EFECE4] shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 flex items-center gap-1.5 cursor-pointer z-10 whitespace-nowrap font-medium"
+          className="hidden sm:flex absolute bottom-14 left-1/2 -translate-x-1/2 bg-[#FDFCF7]/95 hover:bg-[#C4A468] text-[#1C1C1C] text-[11px] uppercase tracking-[0.14em] px-4 py-2 rounded-full border border-[#EFECE4] shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 items-center gap-1.5 cursor-pointer z-10 whitespace-nowrap font-medium"
         >
           <Eye size={13} className="text-[#1C1C1C]" />
           <span>Quick View</span>
         </button>
 
-        {/* Quick Add Bar */}
-        <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#1C1C1C]/90 via-[#1C1C1C]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between">
+        {/* Desktop Quick Add Bar */}
+        <div className="hidden sm:flex absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-[#1C1C1C]/90 via-[#1C1C1C]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 items-center justify-between">
           <button
             onClick={handleQuickAdd}
             className={`w-full py-2.5 px-3 text-xs uppercase tracking-[0.12em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer rounded-full shadow-md ${
@@ -125,10 +139,10 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
       </div>
 
       {/* Product Details */}
-      <div className="pt-3.5 pb-1 flex flex-col flex-1">
+      <div className="pt-2.5 sm:pt-3.5 pb-1 flex flex-col flex-1">
         {/* Color Swatches */}
-        <div className="flex items-center gap-1.5 mb-2">
-          {product.colors.map((c) => (
+        <div className="flex items-center gap-1.5 mb-1.5 sm:mb-2">
+          {product.colors.slice(0, 4).map((c) => (
             <button
               key={c.name}
               title={c.name}
@@ -137,35 +151,35 @@ export const ProductCard: React.FC<ProductCardProps> = React.memo(({
                 setSelectedColor(c.name);
               }}
               style={{ backgroundColor: c.hex }}
-              className={`w-3.5 h-3.5 rounded-full border transition-all cursor-pointer ${
+              className={`w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full border transition-all cursor-pointer ${
                 selectedColor === c.name
                   ? 'ring-1 ring-offset-1 ring-[#C4A468] scale-110 border-transparent'
                   : 'border-[#1C1C1C]/20 hover:scale-105'
               }`}
             />
           ))}
-          <span className="text-[10px] text-[#6B605B] ml-1 font-medium uppercase tracking-wider">
+          <span className="text-[9px] sm:text-[10px] text-[#6B605B] ml-0.5 sm:ml-1 font-medium uppercase tracking-wider">
             {product.colors.length} {product.colors.length === 1 ? 'shade' : 'shades'}
           </span>
         </div>
 
         {/* Product Title */}
-        <h3 className="text-base sm:text-[17px] text-[#1C1C1C] font-semibold tracking-tight leading-snug group-hover:text-[#C4A468] transition-colors">
+        <h3 className="text-sm sm:text-base text-[#1C1C1C] font-semibold tracking-tight leading-snug group-hover:text-[#C4A468] transition-colors line-clamp-1 sm:line-clamp-2">
           {product.name}
         </h3>
 
         {/* Subtitle / Fabric notes */}
-        <p className="text-xs text-[#B2948C] font-medium truncate mt-0.5">
+        <p className="text-[11px] sm:text-xs text-[#B2948C] font-medium truncate mt-0.5">
           {product.subtitle}
         </p>
 
         {/* Price */}
-        <div className="mt-2 flex items-baseline gap-2">
-          <span className="text-sm font-semibold text-[#1C1C1C] tracking-wide">
+        <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5 sm:gap-2">
+          <span className="text-xs sm:text-sm font-semibold text-[#1C1C1C] tracking-wide">
             {formatTaka(getProductPriceBDT(product))}
           </span>
           {product.originalPrice && (
-            <span className="text-xs text-[#6B605B]/60 line-through">
+            <span className="text-[11px] sm:text-xs text-[#6B605B]/60 line-through">
               {formatTaka(getProductOriginalPriceBDT(product)!)}
             </span>
           )}

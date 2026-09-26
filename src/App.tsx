@@ -409,7 +409,7 @@ function StoreApp() {
 
       {/* Notification Toast */}
       {orderToast && (
-        <div className="fixed bottom-20 right-6 z-50 bg-[#1C1C1C] text-[#FDFCF7] px-5 py-3 rounded-full shadow-2xl border border-[#C4A468]/50 flex items-center gap-3 animate-fade-in text-xs tracking-wider uppercase font-medium">
+        <div className="fixed bottom-6 right-4 sm:right-6 z-50 bg-[#1C1C1C] text-[#FDFCF7] px-5 py-3 rounded-full shadow-2xl border border-[#C4A468]/50 flex items-center gap-3 animate-fade-in text-xs tracking-wider uppercase font-medium">
           <CheckCircle2 size={16} className="text-[#C4A468]" />
           <span>{orderToast}</span>
         </div>

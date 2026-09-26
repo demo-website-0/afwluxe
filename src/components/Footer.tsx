@@ -16,10 +16,10 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenPolicy,
 }) => {
   return (
-    <footer id="main-footer" aria-label="Footer" className="bg-[#1C1C1C] text-[#FDFCF7] pt-16 lg:pt-20 pb-12 border-t border-[#C4A468]/20 content-auto">
+    <footer id="main-footer" aria-label="Footer" className="bg-[#1C1C1C] text-[#FDFCF7] pt-12 sm:pt-16 lg:pt-20 pb-12 border-t border-[#C4A468]/20 content-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12 pb-14 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 pb-10 sm:pb-14 border-b border-white/10">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex flex-col items-start">
@@ -170,16 +170,6 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#FDFCF7]/60 font-light">
           <div>
             © 2025 AFW LUXE. All rights reserved.
-          </div>
-
-          {/* Payment Badges */}
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase tracking-wider text-white/50">Secure checkout:</span>
-            <span className="px-2.5 py-0.5 bg-white/10 rounded-full text-[10px] text-white">VISA</span>
-            <span className="px-2.5 py-0.5 bg-white/10 rounded-full text-[10px] text-white">Mastercard</span>
-            <span className="px-2.5 py-0.5 bg-white/10 rounded-full text-[10px] text-white">AMEX</span>
-            <span className="px-2.5 py-0.5 bg-white/10 rounded-full text-[10px] text-white">Apple Pay</span>
-            <span className="px-2.5 py-0.5 bg-white/10 rounded-full text-[10px] text-white">Klarna</span>
           </div>
 
           <div className="flex items-center space-x-4 text-[11px]">

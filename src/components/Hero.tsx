@@ -28,6 +28,7 @@ const HERO_IMAGES = [
 
 export const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const { cmsContent } = useAdminData();
 
   const heroHeadline = cmsContent?.hero?.headline || 'Step Into Luxury';
@@ -41,21 +42,41 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
     return () => clearInterval(timer);
   }, []);
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length);
   };
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    setTouchStartX(null);
   };
 
   return (
     <section
       id="hero-section"
       aria-label="Hero Showcase"
-      className="relative w-full overflow-hidden bg-[#1C1C1C] h-[480px] sm:h-[560px] md:h-[640px] lg:h-[720px] flex items-center justify-center select-none transform-gpu"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="relative w-full overflow-hidden bg-[#1C1C1C] h-[calc(100vh-150px)] [height:calc(100dvh-150px)] min-h-[350px] sm:h-[540px] md:h-[620px] lg:h-[700px] flex items-center justify-center select-none transform-gpu touch-pan-y"
     >
       {/* Background Rotating Images */}
       <div className="absolute inset-0 z-0">
@@ -82,15 +103,15 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows (Subtle on mobile, fully visible on desktop) */}
       <button
         type="button"
         id="hero-prev-btn"
         onClick={handlePrev}
         aria-label="Previous slide"
-        className="absolute left-3 sm:left-6 z-30 p-2.5 sm:p-3 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md transition-all cursor-pointer opacity-80 hover:opacity-100 hover:scale-105"
+        className="hidden sm:flex absolute left-3 sm:left-6 z-30 p-2 sm:p-3 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md transition-all cursor-pointer opacity-80 hover:opacity-100 hover:scale-105"
       >
-        <ChevronLeft size={22} />
+        <ChevronLeft size={20} />
       </button>
 
       <button
@@ -98,9 +119,9 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
         id="hero-next-btn"
         onClick={handleNext}
         aria-label="Next slide"
-        className="absolute right-3 sm:right-6 z-30 p-2.5 sm:p-3 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md transition-all cursor-pointer opacity-80 hover:opacity-100 hover:scale-105"
+        className="hidden sm:flex absolute right-3 sm:right-6 z-30 p-2 sm:p-3 rounded-full bg-white/20 hover:bg-white/40 text-white backdrop-blur-md transition-all cursor-pointer opacity-80 hover:opacity-100 hover:scale-105"
       >
-        <ChevronRight size={22} />
+        <ChevronRight size={20} />
       </button>
 
       {/* Hero Center: Headline "Step Into Luxury" + Button "Shop Now" */}
@@ -110,7 +131,7 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-white font-serif text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-wide sm:tracking-wider drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] mb-6 sm:mb-8"
+          className="text-white font-serif text-2xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-wide sm:tracking-wider drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)] mb-3.5 sm:mb-8"
         >
           {heroHeadline}
         </motion.h1>
@@ -124,14 +145,14 @@ export const Hero: React.FC<HeroProps> = ({ onShopNow }) => {
           transition={{ duration: 0.5, delay: 0.15 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
-          className="px-10 py-4 sm:px-14 sm:py-5 bg-[#C4A468] hover:bg-[#B39255] text-[#1C1C1C] hover:text-white text-xs sm:text-sm uppercase tracking-[0.22em] font-bold rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.45)] border border-[#C4A468] transition-all cursor-pointer backdrop-blur-xs"
+          className="px-7 py-3 sm:px-14 sm:py-5 bg-[#C4A468] hover:bg-[#B39255] text-[#1C1C1C] hover:text-white text-xs sm:text-sm uppercase tracking-[0.2em] font-bold rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.45)] border border-[#C4A468] transition-all cursor-pointer backdrop-blur-xs active:scale-95"
         >
           {heroButtonText}
         </motion.button>
       </div>
 
       {/* Slide Dots / Indicators at bottom */}
-      <div className="absolute bottom-6 left-0 right-0 z-30 flex items-center justify-center gap-2.5">
+      <div className="absolute bottom-3 sm:bottom-6 left-0 right-0 z-30 flex items-center justify-center gap-2 sm:gap-2.5">
         {HERO_IMAGES.map((_, index) => (
           <button
             key={index}
