@@ -130,7 +130,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                       <img
                         src={BRAND_LOGO.dark}
                         alt={BRAND_LOGO.alt}
-                        className="h-5 w-auto object-contain"
+                        className="h-8 w-auto object-contain"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
                         }}

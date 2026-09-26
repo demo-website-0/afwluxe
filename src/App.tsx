@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PRODUCTS } from './data/products';
 import { Product, CartItem } from './types';
-import { AnnouncementBar } from './components/AnnouncementBar';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { TrustBar } from './components/TrustBar';
@@ -233,10 +232,7 @@ function StoreApp() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFCF7] text-[#1C1C1C]">
-      {/* 1. Announcement Bar */}
-      <AnnouncementBar />
-
-      {/* 2. Header */}
+      {/* Header */}
       <Header
         cartCount={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
         wishlistCount={wishlistIds.size}

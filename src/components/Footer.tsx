@@ -24,13 +24,13 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="lg:col-span-2 space-y-4">
             <div className="flex flex-col items-start">
               <img
-                src={BRAND_LOGO.dark}
+                src={BRAND_LOGO.light}
                 alt={BRAND_LOGO.alt}
-                className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
+                className="h-16 sm:h-20 w-auto object-contain"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = BRAND_LOGO.remoteUrl;
-                  target.className = 'h-8 sm:h-9 w-auto object-contain brightness-0 invert';
+                  target.className = 'h-16 sm:h-20 w-auto object-contain brightness-0 invert';
                 }}
               />
               <span className="text-[10px] tracking-[0.3em] text-[#C4A468] uppercase font-semibold pl-0.5 mt-1.5">

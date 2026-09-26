@@ -17,9 +17,6 @@ export const CategoryCards: React.FC<CategoryCardsProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="text-xs uppercase tracking-[0.22em] text-[#B2948C] font-semibold block mb-2">
-            The Wardrobe Pillars
-          </span>
           <h2 id="category-heading" className="text-3xl sm:text-4xl lg:text-5xl text-[#1C1C1C] font-semibold tracking-tight">
             Shop by Category
           </h2>

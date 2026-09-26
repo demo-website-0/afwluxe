@@ -33,7 +33,7 @@ export const EditorialBanner: React.FC<EditorialBannerProps> = ({ onExploreAbaya
             <img
               src={BRAND_LOGO.light}
               alt={BRAND_LOGO.alt}
-              className="h-7 w-auto object-contain"
+              className="h-14 sm:h-16 w-auto object-contain drop-shadow-sm"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = BRAND_LOGO.remoteUrl;

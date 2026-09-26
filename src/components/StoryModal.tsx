@@ -40,7 +40,7 @@ export const StoryModal: React.FC<StoryModalProps> = ({ isOpen, onClose }) => {
                 <img
                   src={BRAND_LOGO.dark}
                   alt={BRAND_LOGO.alt}
-                  className="h-10 w-auto object-contain mx-auto mb-3"
+                  className="h-16 sm:h-20 w-auto object-contain mx-auto mb-4"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
                   }}

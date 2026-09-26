@@ -28,7 +28,7 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onOpenStoryModal }) => {
                 <img
                   src={BRAND_LOGO.dark}
                   alt={BRAND_LOGO.alt}
-                  className="h-6 w-auto object-contain mb-2"
+                  className="h-10 w-auto object-contain mb-2"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
                   }}
@@ -54,7 +54,7 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onOpenStoryModal }) => {
               <img
                 src={BRAND_LOGO.dark}
                 alt={BRAND_LOGO.alt}
-                className="h-7 w-auto object-contain"
+                className="h-14 sm:h-16 w-auto object-contain"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
                 }}

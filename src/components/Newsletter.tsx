@@ -25,7 +25,7 @@ export const Newsletter: React.FC = () => {
         <img
           src={BRAND_LOGO.dark}
           alt={BRAND_LOGO.alt}
-          className="h-9 sm:h-10 w-auto object-contain mx-auto mb-4"
+          className="h-16 sm:h-20 w-auto object-contain mx-auto mb-4 drop-shadow-xs"
           onError={(e) => {
             (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
           }}

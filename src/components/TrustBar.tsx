@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
 
 interface TrustBarProps {
   onSelectCategory?: (category: string) => void;
@@ -63,52 +62,15 @@ const WHATS_NEW_CATEGORIES: WhatsNewCategory[] = [
   },
 ];
 
+// Triplicated categories for a seamless, continuous infinite loop
+const LOOPED_CATEGORIES = [
+  ...WHATS_NEW_CATEGORIES.map((cat, idx) => ({ ...cat, loopKey: `${cat.id}-set0-${idx}` })),
+  ...WHATS_NEW_CATEGORIES.map((cat, idx) => ({ ...cat, loopKey: `${cat.id}-set1-${idx}` })),
+  ...WHATS_NEW_CATEGORIES.map((cat, idx) => ({ ...cat, loopKey: `${cat.id}-set2-${idx}` })),
+];
+
 export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-  const moved = useRef(false);
-
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -300 : 300;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!scrollContainerRef.current) return;
-    isDragging.current = true;
-    moved.current = false;
-    startX.current = e.pageX - scrollContainerRef.current.offsetLeft;
-    scrollLeft.current = scrollContainerRef.current.scrollLeft;
-  };
-
-  const handleMouseLeave = () => {
-    isDragging.current = false;
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current || !scrollContainerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.4;
-    if (Math.abs(walk) > 4) {
-      moved.current = true;
-    }
-    scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
-  };
-
   const handleCategoryClick = (categoryId: string) => {
-    if (moved.current) {
-      moved.current = false;
-      return;
-    }
     if (onSelectCategory) {
       onSelectCategory(categoryId);
     }
@@ -125,51 +87,29 @@ export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
       className="bg-[#FDFCF7] border-y border-[#EFECE4] py-8 sm:py-10 lg:py-12 select-none overflow-hidden scroll-mt-20 lg:scroll-mt-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-8 xl:gap-12">
-          {/* Left Title: WHAT'S NEW & Controls */}
-          <div className="shrink-0 flex items-center justify-between w-full lg:w-auto lg:flex-col lg:items-start gap-3">
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1C1C1C] uppercase tracking-tight leading-[1.05]">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 xl:gap-12">
+          {/* Left Title: WHAT'S NEW */}
+          <div className="shrink-0 flex items-center justify-center lg:justify-start w-full lg:w-auto lg:flex-col lg:items-start">
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#1C1C1C] uppercase tracking-tight leading-[1.05] text-center lg:text-left">
               WHAT'S
               <br />
               <span className="text-[#C4A468]">NEW</span>
             </h2>
-
-            {/* Arrow Controls (visible on all screens for effortless navigation) */}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => handleScroll('left')}
-                aria-label="Scroll left in categories"
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#EFECE4] bg-white flex items-center justify-center text-[#1C1C1C] hover:text-[#C4A468] hover:border-[#C4A468] hover:shadow-xs transition-all cursor-pointer"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                type="button"
-                onClick={() => handleScroll('right')}
-                aria-label="Scroll right in categories"
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#EFECE4] bg-white flex items-center justify-center text-[#1C1C1C] hover:text-[#C4A468] hover:border-[#C4A468] hover:shadow-xs transition-all cursor-pointer"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
           </div>
 
-          {/* Categories Horizontal Carousel / Row */}
-          <div className="w-full relative flex-1 min-w-0">
+          {/* Categories Continuous Looping Track */}
+          <div className="w-full relative flex-1 min-w-0 overflow-hidden">
+            {/* Soft edge gradient masks for luxury fade effect */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-r from-[#FDFCF7] to-transparent z-10" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-12 bg-gradient-to-l from-[#FDFCF7] to-transparent z-10" />
+
             <div
-              ref={scrollContainerRef}
-              onMouseDown={handleMouseDown}
-              onMouseLeave={handleMouseLeave}
-              onMouseUp={handleMouseUp}
-              onMouseMove={handleMouseMove}
-              className="flex items-start justify-start lg:justify-between gap-5 sm:gap-6 lg:gap-5 xl:gap-7 overflow-x-auto scrollbar-none py-1 px-1 scroll-smooth cursor-grab active:cursor-grabbing overscroll-contain"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              className="animate-marquee-slow flex items-start gap-5 sm:gap-6 lg:gap-7 xl:gap-8 py-1.5 px-2 hover:[animation-play-state:paused] active:[animation-play-state:paused]"
             >
-              {WHATS_NEW_CATEGORIES.map((cat) => (
+              {LOOPED_CATEGORIES.map((cat) => (
                 <button
-                  key={cat.id}
-                  id={`whats-new-cat-${cat.id}`}
+                  key={cat.loopKey}
+                  id={`whats-new-cat-${cat.loopKey}`}
                   type="button"
                   onClick={() => handleCategoryClick(cat.categoryId)}
                   className="flex flex-col items-center group cursor-pointer shrink-0 focus:outline-hidden"
@@ -181,14 +121,14 @@ export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
                       alt={cat.label}
                       referrerPolicy="no-referrer"
                       draggable={false}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110 pointer-events-none"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110 pointer-events-none select-none"
                       loading="lazy"
                       decoding="async"
                     />
                   </div>
 
                   {/* Uppercase Category Label */}
-                  <span className="mt-3 text-center text-xs sm:text-[13px] font-bold tracking-wider text-[#1C1C1C] uppercase whitespace-nowrap group-hover:text-[#C4A468] transition-colors pointer-events-none">
+                  <span className="mt-3 text-center text-xs sm:text-[13px] font-bold tracking-wider text-[#1C1C1C] uppercase whitespace-nowrap group-hover:text-[#C4A468] transition-colors pointer-events-none select-none">
                     {cat.label}
                   </span>
                 </button>
@@ -200,3 +140,4 @@ export const TrustBar: React.FC<TrustBarProps> = ({ onSelectCategory }) => {
     </section>
   );
 };
+

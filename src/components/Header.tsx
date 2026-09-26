@@ -152,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({
             <img
               src={BRAND_LOGO.dark}
               alt={BRAND_LOGO.alt}
-              className="h-7 sm:h-8 md:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-12 sm:h-13 md:h-14 lg:h-15 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-xs"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
               }}
@@ -256,7 +256,7 @@ export const Header: React.FC<HeaderProps> = ({
                   <img
                     src={BRAND_LOGO.dark}
                     alt={BRAND_LOGO.alt}
-                    className="h-8 w-auto object-contain"
+                    className="h-13 sm:h-14 w-auto object-contain"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = BRAND_LOGO.remoteUrl;
                     }}

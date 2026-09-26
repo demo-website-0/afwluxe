@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product } from '../types';
 import { ProductCard } from './ProductCard';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface NewArrivalsProps {
   products: Product[];
@@ -42,12 +42,6 @@ export const NewArrivals: React.FC<NewArrivalsProps> = ({
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-[#EFECE4] pb-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles size={13} className="text-[#C4A468]" />
-              <span className="text-xs uppercase tracking-[0.22em] text-[#B2948C] font-semibold">
-                London Studio Release
-              </span>
-            </div>
             <h2 id="new-arrivals-heading" className="text-3xl sm:text-4xl lg:text-5xl text-[#1C1C1C] font-semibold tracking-tight">
               New Arrivals
             </h2>
